@@ -1,0 +1,190 @@
+@charset "utf-8";
+
+/* General body and container styles */
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #f0f4ff; /* Softer background color */
+    max-width: 800px; /* Wider max width */
+    margin: 0 auto;
+    padding: 20px;
+}
+.container {
+    background-color: #ffffff; /* White background for the main container */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Softer shadow */
+    transition: box-shadow 0.3s; /* Transition for shadow on hover */
+}
+.container:hover {
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+h1 {
+    text-align: center;
+    color: #333; /* Darker text color */
+}
+input,
+button {
+    margin: 10px 5px; /* Increased margin for better spacing */
+    padding: 10px; /* Increased padding */
+    font-size: 16px; /* Larger font size */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none; /* Remove outline on focus */
+    transition: border-color 0.3s; /* Transition for border color */
+}
+input:focus {
+    border-color: #5cb85c; /* Highlight border on focus */
+}
+button {
+    cursor: pointer;
+    background-color: #5cb85c; /* Green button color */
+    color: white;
+    transition: background-color 0.3s; /* Smooth transition */
+    border: none; /* No border */
+}
+button:hover {
+    background-color: #4cae4c; /* Darker green on hover */
+}
+
+/* List and card styles */
+.name-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px; /* Increased gap between cards */
+    padding: 0;
+    list-style-type: none;
+}
+.card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effects */
+    position: relative; /* Position for button */
+}
+.card:hover {
+    transform: translateY(-2px); /* Lift effect on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+.card img {
+    width: 80px; /* Slightly larger image */
+    height: 80px; /* Slightly larger image */
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+.card span {
+    font-size: 18px; /* Slightly larger font size for names */
+    font-weight: bold; /* Bold names for better emphasis */
+    color: #333; /* Darker text for names */
+    cursor: pointer; /* Pointer cursor for editable names */
+}
+.delete-btn {
+    margin-top: 10px;
+    background-color: #ff4d4d; /* Red button color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px 12px; /* Adjusted padding */
+    font-size: 14px; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+.delete-btn:hover {
+    background-color: #e63946; /* Darker red on hover */
+}
+
+/* Teams output style */
+#teamsOutput {
+    margin-top: 20px;
+}
+.team {
+    background-color: #e0e0ff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #b0b0e0; /* Slight border for teams */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for teams */
+    opacity: 0; /* Start hidden */
+    transform: translateY(20px); /* Start 20px down */
+    animation: slideUp 0.5s forwards; /* Animation for slide up */
+    position: relative; /* For delete button positioning */
+}
+@keyframes slideUp {
+    to {
+        opacity: 1; /* Fully visible */
+        transform: translateY(0); /* Move to original position */
+    }
+}
+.team strong {
+    font-size: 18px; /* Increased font size for team labels */
+    color: #333; /* Darker text for teams */
+}
+.team .delete-team-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4d; /* Red button color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px; /* Adjusted padding */
+    font-size: 12px; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+.team .delete-team-btn:hover {
+    background-color: #e63946; /* Darker red on hover */
+}
+
+/* Teams output style 수정 */
+#teamsOutput {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.team {
+    background-color: #e0e0ff;
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid #b0b0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.5s forwards;
+    position: relative;
+    width: 200px; /* 팀 카드의 너비 설정 */
+}
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.team strong {
+    font-size: 18px;
+    color: #333;
+    display: block;
+    margin-bottom: 10px;
+}
+.team .delete-team-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 12px;
+    transition: background-color 0.3s;
+}
+.team .delete-team-btn:hover {
+    background-color: #e63946;
+}
+.team .card {
+    margin-bottom: 10px;
+}
