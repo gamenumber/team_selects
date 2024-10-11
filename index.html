@@ -145,6 +145,57 @@
             .team .delete-team-btn:hover {
                 background-color: #e63946; /* Darker red on hover */
             }
+
+            /* Teams output style 수정 */
+            #teamsOutput {
+                margin-top: 20px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+            }
+            .team {
+                background-color: #e0e0ff;
+                border-radius: 10px;
+                padding: 15px;
+                border: 1px solid #b0b0e0;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                opacity: 0;
+                transform: translateY(20px);
+                animation: slideUp 0.5s forwards;
+                position: relative;
+                width: 200px; /* 팀 카드의 너비 설정 */
+            }
+            @keyframes slideUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .team strong {
+                font-size: 18px;
+                color: #333;
+                display: block;
+                margin-bottom: 10px;
+            }
+            .team .delete-team-btn {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background-color: #ff4d4d;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                padding: 5px 10px;
+                font-size: 12px;
+                transition: background-color 0.3s;
+            }
+            .team .delete-team-btn:hover {
+                background-color: #e63946;
+            }
+            .team .card {
+                margin-bottom: 10px;
+            }
         </style>
     </head>
     <body>
@@ -280,28 +331,27 @@
                     deleteTeamButton.textContent = "팀 삭제";
                     deleteTeamButton.className = "delete-team-btn";
                     deleteTeamButton.onclick = () => {
-                        teamDiv.remove(); // Remove the team div
+                        teamDiv.remove();
                     };
 
                     teamDiv.appendChild(teamLabel);
                     teamDiv.appendChild(deleteTeamButton);
 
-                    // Create a card for each team member
                     team.forEach((member) => {
                         const memberCard = document.createElement("div");
-                        memberCard.className = "card"; // Use the same card class
+                        memberCard.className = "card";
 
                         const memberImg = document.createElement("img");
                         memberImg.src = member.avatar;
-                        memberImg.style.width = "80px"; // Keep original size for team member cards
-                        memberImg.style.height = "80px"; // Keep original size for team member cards
+                        memberImg.style.width = "60px"; // 팀 내 멤버 이미지 크기 조정
+                        memberImg.style.height = "60px";
 
                         const memberName = document.createElement("span");
                         memberName.textContent = member.name;
 
                         memberCard.appendChild(memberImg);
                         memberCard.appendChild(memberName);
-                        teamDiv.appendChild(memberCard); // Append the member card to the team div
+                        teamDiv.appendChild(memberCard);
                     });
 
                     teamsOutput.appendChild(teamDiv);
@@ -311,8 +361,8 @@
                 teamsOutput.childNodes.forEach((teamDiv, index) => {
                     setTimeout(() => {
                         teamDiv.style.opacity = 1;
-                        teamDiv.style.transform = "translateY(0)"; // Reset position to original
-                    }, index * 100); // Stagger the animation
+                        teamDiv.style.transform = "translateY(0)";
+                    }, index * 100);
                 });
             }
 
