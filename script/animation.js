@@ -50,44 +50,55 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
-    // Shuffle cards randomly
+    // Shuffle cards randomly (X and Y axes shuffle)
+    // Shuffle cards randomly (X and Y axes shuffle) and shuffle the order in the DOM
     window.shuffleCards = function () {
         const cards = Array.from(nameList.children);
-        cards.forEach((card) => {
-            const randomX = Math.random() * 200 - 100; // Random X-axis translation (-100 to 100)
-            const randomY = Math.random() * 200 - 100; // Random Y-axis translation (-100 to 100)
+
+        // Randomize the order of the cards array
+        const shuffledCards = cards.sort(() => Math.random() - 0.5);
+
+        shuffledCards.forEach((card) => {
+            const randomX = Math.random() * 500 - 250; // Random X-axis translation (-250 to 250)
+            const randomY = Math.random() * 500 - 250; // Random Y-axis translation (-250 to 250)
             card.animate(
                 [
                     { transform: `translate(0, 0)` }, // Initial state
                     { transform: `translate(${randomX}px, ${randomY}px)` }, // Random shuffle
                 ],
                 {
-                    duration: 500,
+                    duration: 1000, // Longer duration for more dramatic effect
                     easing: "ease-out",
                     fill: "forwards",
                 }
             );
         });
 
-        // After the shuffle, call sortCards to align them
-        setTimeout(sortCards, 1000); // Delay to allow shuffle to finish
+        // After shuffle effect, re-append the shuffled cards to change their order in the DOM
+        setTimeout(() => {
+            shuffledCards.forEach((card) => {
+                nameList.appendChild(card); // Re-append shuffled cards to the list
+            });
+
+            sortCards(); // Then, sort them back into position in their new shuffled order
+        }, 1500); // Delay to allow shuffle animation to finish
     };
 
-    // Sort cards back into position
+    // Sort cards back into their new shuffled positions
     function sortCards() {
         const cards = Array.from(nameList.children);
-        cards.forEach((card, index) => {
+        cards.forEach((card) => {
             card.animate(
                 [
                     {
-                        transform: `translate(${Math.random() * 200 - 100}px, ${
-                            Math.random() * 200 - 100
+                        transform: `translate(${Math.random() * 500 - 250}px, ${
+                            Math.random() * 500 - 250
                         }px)`,
                     }, // Initial random position
-                    { transform: `translate(0, 0)` }, // Return to sorted position
+                    { transform: `translate(0, 0)` }, // Return to the new shuffled position
                 ],
                 {
-                    duration: 500,
+                    duration: 1000, // Smooth transition back to their new positions
                     easing: "ease-in-out",
                     fill: "forwards",
                 }
