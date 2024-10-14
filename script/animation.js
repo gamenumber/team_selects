@@ -50,6 +50,51 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
+    // Shuffle cards randomly
+    window.shuffleCards = function () {
+        const cards = Array.from(nameList.children);
+        cards.forEach((card) => {
+            const randomX = Math.random() * 200 - 100; // Random X-axis translation (-100 to 100)
+            const randomY = Math.random() * 200 - 100; // Random Y-axis translation (-100 to 100)
+            card.animate(
+                [
+                    { transform: `translate(0, 0)` }, // Initial state
+                    { transform: `translate(${randomX}px, ${randomY}px)` }, // Random shuffle
+                ],
+                {
+                    duration: 500,
+                    easing: "ease-out",
+                    fill: "forwards",
+                }
+            );
+        });
+
+        // After the shuffle, call sortCards to align them
+        setTimeout(sortCards, 1000); // Delay to allow shuffle to finish
+    };
+
+    // Sort cards back into position
+    function sortCards() {
+        const cards = Array.from(nameList.children);
+        cards.forEach((card, index) => {
+            card.animate(
+                [
+                    {
+                        transform: `translate(${Math.random() * 200 - 100}px, ${
+                            Math.random() * 200 - 100
+                        }px)`,
+                    }, // Initial random position
+                    { transform: `translate(0, 0)` }, // Return to sorted position
+                ],
+                {
+                    duration: 500,
+                    easing: "ease-in-out",
+                    fill: "forwards",
+                }
+            );
+        });
+    }
+
     // Delete button functionality
     nameList.addEventListener("click", (e) => {
         if (e.target.classList.contains("delete-btn")) {
